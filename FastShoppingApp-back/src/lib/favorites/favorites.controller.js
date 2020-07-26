@@ -17,7 +17,6 @@ class FavoritesController {
   async getFavorite(userID) {
     const { Favorite } = models
     const id = userID.userID
-
     const response = await Favorite.findAll({
       where: {
         userId: id

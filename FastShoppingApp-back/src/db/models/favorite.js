@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   Favorite.init(
     {
-      userId: DataTypes.INTEGER,
       film: DataTypes.STRING
     },
     {

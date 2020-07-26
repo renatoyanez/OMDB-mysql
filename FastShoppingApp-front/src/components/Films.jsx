@@ -40,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 export default ({ films, handleAddFavorite }) => {
   const classes = useStyles();
   const filmsList = films.searchedFilms.Search
-  // console.log(filmsList)
 
   return (
     <React.Fragment>
@@ -49,7 +48,7 @@ export default ({ films, handleAddFavorite }) => {
             <Container className={classes.cardGrid} maxWidth="md">
               {/* End hero unit */}
               <Grid container spacing={4}>
-                {/* {filmsList.map((film) => (
+                {filmsList.map((film) => (
                   <Grid item key={film.imdbID} xs={12} sm={6} md={3}>
                     <Card className={classes.card}>
                       <CardMedia
@@ -75,7 +74,7 @@ export default ({ films, handleAddFavorite }) => {
                       </CardActions>
                     </Card>
                   </Grid>
-                ))} */}
+                ))}
               </Grid>
             </Container>
         </div>

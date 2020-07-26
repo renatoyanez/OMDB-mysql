@@ -3,7 +3,7 @@ import { withRouter } from 'react-router'
 import Films from "../components/Films";
 import { connect } from "react-redux";
 import { fetchFilms } from "../redux/actions/films";
-// import { addFavoriteCreator } from '../redux/actions/favorites'
+import { addFavoriteCreator } from '../redux/actions/favorites'
 
 class FilmsContainer extends React.Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class FilmsContainer extends React.Component {
     if (user) {
       alert("Added")
       let obj = { film: title, user: user }
-      // this.props.addFavoriteCreator(obj)
+      this.props.addFavoriteCreator(obj)
     }
   }
 
@@ -32,7 +32,7 @@ class FilmsContainer extends React.Component {
 const mapDispatchToProps = dispatch => {
   return {
     fetchFilms: id => dispatch(fetchFilms(id)),
-    // addFavoriteCreator: (obj) => dispatch(addFavoriteCreator(obj))
+    addFavoriteCreator: (obj) => dispatch(addFavoriteCreator(obj))
   };
 };
 

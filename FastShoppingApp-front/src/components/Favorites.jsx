@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default ({ props }) => {
   const classes = useStyles();
-  const favoritesList = props
+  const favoritesList = props.favorites.favorites
   console.log(favoritesList)
 
   return (
@@ -49,7 +49,7 @@ export default ({ props }) => {
             <Container className={classes.cardGrid} maxWidth="md">
               {/* End hero unit */}
               <Grid container spacing={4}>
-                {/* {favoritesList.map((film) => (
+                {favoritesList.map((film) => (
                   <Grid item key={film.imdbID} xs={12} sm={6} md={3}>
                     <Card className={classes.card}>
                       <CardMedia
@@ -75,7 +75,7 @@ export default ({ props }) => {
                       </CardActions>
                     </Card>
                   </Grid>
-                ))} */}
+                ))}
               </Grid>
             </Container>
         </div>

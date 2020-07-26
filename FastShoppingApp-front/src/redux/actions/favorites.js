@@ -13,30 +13,24 @@ export const addFavoriteCreator = object => dispatch => {
 }
 
 
-const fetch_from_api = array_from_db => {
-    const array = []
-    const final_array = array_from_db.forEach(each => {
-        return axios.get(`https://www.omdbapi.com/?apikey=20dac387&i=${each.film}`).then(response => response.data).then(data => {
-            array.push(data)
-        }).then(arr => arr)
-    })
-    console.log(final_array)
-}
-
-// response.data es un array
-
-
-
 export const fetchFavoritesCreator = userId => async dispatch => {
+
+    let array = [];
+
     //fetch data from db:
     const response = await axios.get(`/favorites/${userId}`)
     const favorites = await response.data //array of favorites from db
-   
-    //invokes callback from api:
-    const invoke = await fetch_from_api(favorites)
-    return invoke
 
-    // await dispatch(fetchFavorites())
+    //push data to array:
+    for (let i in favorites) {
+        const fetch = await axios.get(`https://www.omdbapi.com/?apikey=20dac387&i=${favorites[i].film}`)
+        const res = await fetch.data
+        await array.push(res)
+    }
+
+    console.log(array)
+
+    return dispatch(fetchFavorites(array))
 }
 
 

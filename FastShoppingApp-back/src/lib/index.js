@@ -1,12 +1,10 @@
 const express = require("express");
-const products = require("./products");
-const customers = require("./customers");
-const orders = require("./orders");
+const users = require("./users");
+const favorites = require('./favorites')
 
 const router = express.Router();
 
-router.use("/products", products);
-router.use("/customers", customers);
-router.use("/orders/", orders);
+router.use("/users", users);
+router.use("/favorites", favorites);
 
 module.exports = router;
