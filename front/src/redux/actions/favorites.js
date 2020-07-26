@@ -1,4 +1,6 @@
-import { ADD_TO_FAVORITES } from '../constants'
+import {
+    ADD_TO_FAVORITES
+} from '../constants'
 import axios from 'axios';
 
 export const fetchFavorites = favorites => ({
@@ -15,22 +17,26 @@ export const addFavoriteCreator = object => dispatch => {
 
 export const fetchFavoritesCreator = userId => async dispatch => {
 
-    let array = [];
-
     //fetch data from db:
     const response = await axios.get(`/favorites/${userId}`)
     const favorites = await response.data //array of favorites from db
 
+    var array = [];
     //push data to array:
-    for (let i in favorites) {
-        const fetch = await axios.get(`https://www.omdbapi.com/?apikey=20dac387&i=${favorites[i].film}`)
-        const res = await fetch.data
-        await array.push(res)
+    const nuevo = async arreglo => {
+        for (let i in arreglo) {
+            const fetch = await axios.get(`https://www.omdbapi.com/?apikey=20dac387&i=${arreglo[i].film}`)
+            const res = await fetch.data
+            array.push(res)
+        }
+        return array
     }
 
-    console.log(array)
+    const new_array = await nuevo(favorites)
 
-    return dispatch(fetchFavorites(array))
+    console.log(new_array)
+
+    return dispatch(fetchFavorites(new_array))
 }
 
 
