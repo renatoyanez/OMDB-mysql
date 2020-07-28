@@ -34,10 +34,10 @@ const useStyles = makeStyles((theme) => ({
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(2, 0, 6),
   },
   heroContent2: {
-    padding: theme.spacing(8, 0, 6),
+    padding: theme.spacing(8, 0, 1),
   },
 }));
 
@@ -49,7 +49,7 @@ export default ({ props }) => {
 
   return (
     <React.Fragment>
-      <main className={classes.main}>
+      <main>
         <Container maxWidth="sm" component="main" className={classes.heroContent2}>
           <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
             List of your favorites

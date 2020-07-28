@@ -4,7 +4,6 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -13,6 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import Button from '@material-ui/core/Button';
 import '../styles/landingPage.scss'
 
 const useStyles = makeStyles((theme) => ({
@@ -80,8 +80,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default ({ onSearch, handleChange, props }) => {
-  console.log(props.user.user.name)
   const user = props.user.user.name
+  console.log(user)
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -151,9 +152,9 @@ export default ({ onSearch, handleChange, props }) => {
     <div className={classes.grow}>
       <AppBar position="relative" style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
         <Toolbar className={classes.leftContent}>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Button component={Link} to='/' className={classes.title} color='inherit' variant="text" nowrap='true'>
             OMDB
-          </Typography>
+          </Button>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -173,7 +174,7 @@ export default ({ onSearch, handleChange, props }) => {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton component={Link} to={`/favorites/${user}`} aria-label="show 4" color='inherit'>
-              <Badge badgeContent={4} color="secondary">
+              <Badge badgeContent={null} color="secondary">
                 <FavoriteIcon id='favorite'/>
               </Badge>
             </IconButton>

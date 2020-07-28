@@ -11,11 +11,11 @@ class FilmsContainer extends React.Component {
     this.handleAddFavorite = this.handleAddFavorite.bind(this)
   }
 
-  handleAddFavorite(title) {
+  handleAddFavorite(imdbID, title) {
     const user = this.props.user.user
     if (user) {
-      alert("Added")
-      let obj = { film: title, user: user }
+      alert(`${title} added`)
+      let obj = { film: imdbID, user: user }
       this.props.addFavoriteCreator(obj)
     }
   }

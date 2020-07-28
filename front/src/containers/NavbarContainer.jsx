@@ -3,6 +3,8 @@ import Navbar from "../components/Navbar";
 import { connect } from "react-redux";
 import { fetchFilms } from "../redux/actions/films";
 import { withRouter } from "react-router";
+import { fetchFavoritesCreator } from '../redux/actions/favorites'
+
 
 class NavbarContainer extends React.Component {
   constructor() {
@@ -31,7 +33,10 @@ class NavbarContainer extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return { fetchFilms: films => dispatch(fetchFilms(films)) };
+  return {
+    fetchFilms: films => dispatch(fetchFilms(films)),
+    fetchFavoritesCreator: (userID) => dispatch(fetchFavoritesCreator(userID))
+  };
 };
 
 const mapStateToProps = state => {

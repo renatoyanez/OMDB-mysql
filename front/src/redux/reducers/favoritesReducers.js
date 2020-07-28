@@ -1,4 +1,4 @@
-import { ADD_TO_FAVORITES } from '../constants'
+import { FETCH_FAVORITES } from '../constants'
 
 const initialState = {
     favorites: []
@@ -7,7 +7,7 @@ const initialState = {
 export default (state = initialState, action) => {
     
     switch (action.type) {
-        case ADD_TO_FAVORITES: return Object.assign({}, state, { favorites: action.favorites })
+        case FETCH_FAVORITES: return Object.assign({}, state, { favorites: action.favorites })
         default:
             return state;
     }

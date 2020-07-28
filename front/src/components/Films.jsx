@@ -65,7 +65,7 @@ export default ({ films, handleAddFavorite }) => {
                     </Typography>
                       </CardContent>
                       <CardActions>
-                        <IconButton onClick={() => handleAddFavorite(film.imdbID)} aria-label="add to favorites" title="Agregar a favoritos">
+                        <IconButton onClick={() => handleAddFavorite(film.imdbID, film.Title)} aria-label="add to favorites" title="Agregar a favoritos">
                           <FavoriteBorderIcon />
                         </IconButton>
                         <Button size="small" color="primary">

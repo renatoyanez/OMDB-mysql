@@ -19,7 +19,7 @@ export default () => {
                 <p><span className='decorate'>Explore films and TV shows</span></p>
                 {/* Button: */}
                 <div className='text-center wow bounceInUp' data-wow-delay='0.3s'>
-                  <button>START SEARCHING</button>
+                  <button onClick={() =>  window.location.href='/login'} >START YOUR ACCOUNT</button>
                 </div>
               </div>
             </div>
