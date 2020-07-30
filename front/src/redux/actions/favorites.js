@@ -1,7 +1,6 @@
 import {
     ADD_TO_FAVORITES,
     FETCH_FAVORITES,
-    FETCH_FAVORITES_ERROR
 } from '../constants'
 import axios from 'axios';
 
@@ -15,21 +14,13 @@ export const fetchExistingFavorites = favorites => ({
     favorites
 });
 
-export const fetchFavoritesError = error => ({
-    type: FETCH_FAVORITES_ERROR,
-    error
-});
-
 export const addFavoriteCreator = object => dispatch => {
     return axios.post('/favorites/add', object)
         .then(res => res.data)
         .then(favorite => {
             dispatch(fetchFavorites(favorite))
         })
-        //catches error
-        .catch(err => {
-            dispatch(fetchFavoritesError(err))
-        })
+        .catch(error => console.log(error))
 }
 
 //this function pushes data to a new array after fetching data from db and public api: 

@@ -9,4 +9,3 @@ export const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE'
 /** Constants related to favorites **/
 export const ADD_TO_FAVORITES = 'ADD_TO_FAVORITES';
 export const FETCH_FAVORITES = 'FETCH_FAVORITES';
-export const FETCH_FAVORITES_ERROR = 'FETCH_FAVORITES_ERROR';
