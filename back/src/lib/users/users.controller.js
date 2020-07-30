@@ -7,7 +7,7 @@ class UsersController {
     return created
   }
 
-  getUserByEmail(email) {
+  async getUserByEmail(email) {
     email = email.email
     const { User } = models;
     return User.findOne({ where: { email } })

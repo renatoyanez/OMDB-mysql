@@ -3,17 +3,26 @@ import { withRouter } from 'react-router'
 import Favorites from "../components/Favorites";
 import { connect } from "react-redux";
 import { fetchFilms } from "../redux/actions/films";
-import { fetchFavoritesCreator } from '../redux/actions/favorites'
+import { fetchFavoritesCreator, fetchRemoveFavorite } from '../redux/actions/favorites'
 
 class FavoritesContainer extends React.Component {
+    constructor() {
+        super()
+        this.handleDelete = this.handleDelete.bind(this)
+    }
 
     componentDidMount() {
         this.props.fetchFavoritesCreator(this.props.user.user.id)
     }
 
+    handleDelete(userId, imdbID) {
+        this.props.fetchRemoveFavorite(this.props.user.id, imdbID)
+        alert("Acabas de eliminar esta propiedad de favoritos")
+    }
+
     render() {
         return (
-            <Favorites props = {this.props}/>
+            <Favorites props={this.props} />
         );
     }
 }
@@ -21,7 +30,8 @@ class FavoritesContainer extends React.Component {
 const mapDispatchToProps = dispatch => {
     return {
         fetchFilms: id => dispatch(fetchFilms(id)),
-        fetchFavoritesCreator: (userID) => dispatch(fetchFavoritesCreator(userID))
+        fetchFavoritesCreator: (userID) => dispatch(fetchFavoritesCreator(userID)),
+        fetchRemoveFavorite: (userId, imdbID) => dispatch(fetchRemoveFavorite(userId, imdbID))
     };
 };
 

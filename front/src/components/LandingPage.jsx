@@ -19,7 +19,7 @@ export default () => {
                 <p><span className='decorate'>Explore films and TV shows</span></p>
                 {/* Button: */}
                 <div className='text-center wow bounceInUp' data-wow-delay='0.3s'>
-                  <button onClick={() =>  window.location.href='/login'} >START YOUR ACCOUNT</button>
+                  <button onClick={() =>  window.location.href='/register'} >START YOUR ACCOUNT</button>
                 </div>
               </div>
             </div>
@@ -48,11 +48,11 @@ export default () => {
           <div className='container'>
             <div className='row'>
               <div className='banner-text wow bounceInUp' data-wow-delay='0.1s'>
-                <h2>Welcome to OMDB</h2>
-                <p><span className='decorate'>Explore films and TV shows</span></p>
+                <h2>OR</h2>
+                <p><span className='decorate'>If you already have an account</span></p>
                 {/* Button: */}
                 <div className='text-center wow bounceInUp' data-wow-delay='0.3s'>
-                  <button>START SEARCHING</button>
+                  <button onClick={() =>  window.location.href='/login'}>SIGN IN</button>
                 </div>
               </div>
             </div>

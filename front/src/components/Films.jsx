@@ -10,6 +10,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
+import Modal from '../components/Modal'
 import '../styles/films.scss'
 
 const useStyles = makeStyles((theme) => ({
@@ -45,38 +46,39 @@ export default ({ films, handleAddFavorite }) => {
     <React.Fragment>
       <main className={classes.main}>
         <div className={classes.heroContent}>
-            <Container className={classes.cardGrid} maxWidth="md">
-              {/* End hero unit */}
-              <Grid container spacing={4}>
-                {filmsList.map((film) => (
-                  <Grid item key={film.imdbID} xs={12} sm={6} md={3}>
-                    <Card className={classes.card}>
-                      <CardMedia
-                        className={classes.cardMedia}
-                        image={film.Poster}
-                        title="Image title"
-                      />
-                      <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {film.Title}
-                    </Typography>
-                        <Typography>
-                          {film.Year}
-                    </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <IconButton onClick={() => handleAddFavorite(film.imdbID, film.Title)} aria-label="add to favorites" title="Agregar a favoritos">
-                          <FavoriteBorderIcon />
-                        </IconButton>
-                        <Button size="small" color="primary">
-                          Edit
+          <Container className={classes.cardGrid} maxWidth="md">
+            {/* End hero unit */}
+            {filmsList ? (
+            <Grid container spacing={4}>
+              {filmsList.map((film) => (
+                <Grid item key={film.imdbID} xs={12} sm={6} md={3}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={film.Poster}
+                      title="Image title"
+                    />
+                    <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {film.Title}
+                      </Typography>
+                      <Typography>
+                        {film.Year}
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <IconButton disableRipple={true} onClick={() => handleAddFavorite(film.imdbID, film.Title)} aria-label="add to favorites" title="Agregar a favoritos">
+                        <FavoriteBorderIcon />
+                      </IconButton>
+                      <Button size="small" color="primary">
+                        Edit
                     </Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>) : <Modal />}
+          </Container>
         </div>
       </main>
     </React.Fragment>

@@ -1,6 +1,5 @@
 const express = require("express");
 const UsersController = require("./users.controller");
-
 const router = express.Router();
 const controller = new UsersController();
 
@@ -21,19 +20,6 @@ router.get("/by-email/:email", async (req, res, next) => {
     res.status(200).json(response)
   }).catch(next)
 })
-
-//tira error en cliente, pero 200 en back con problema header
-
-// router.get("/by-email/:email", async (req, res, next) => {
-//   const email = req.params;
-//   const response = controller.getUserByEmail(email)
-//   response.then(data => {
-//     if (!data) res.sendStatus(404)
-//     res.json(data)
-//   })
-//     .catch(next)
-//   })
-//tira error en cliente, pero 200 en back con problema header
 
 
 module.exports = router;

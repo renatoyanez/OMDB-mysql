@@ -12,6 +12,8 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
+import Alert from '@material-ui/lab/Alert';
+
 
 function Copyright() {
   return (
@@ -57,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default ({ handleSubmit, handleChange, state }) => {
+export default ({ handleSubmit, handleChange, state, props }) => {
   const classes = useStyles();
   const user = state
 
@@ -108,6 +110,7 @@ export default ({ handleSubmit, handleChange, state }) => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
+            {(props.user.user.email !== user.email) && (user.email !== '') ? <Alert severity="error">Wrong user, try again</Alert> : null}
             <Button
               disabled={validateUser(user)}
               type="submit"

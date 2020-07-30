@@ -25,4 +25,16 @@ router.get('/:userID', async (req, res, next) => {
   }
 })
 
+
+router.delete('/remove/:userID/:imdbID', async (req, res, next) => {
+  try {
+    const user = req.params.userID;
+    const film = req.params.imdbID;
+    const toDelete = await controller.removeFavorite(user, film);
+    res.json(toDelete)
+  } catch (error) {
+    next(error)
+  }
+})
+
 module.exports = router;

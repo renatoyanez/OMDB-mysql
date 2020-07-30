@@ -1,5 +1,5 @@
 import {
-    GET_USER
+    GET_USER, FETCH_USER_FAILURE
 } from '../constants'
 import axios from "axios";
 
@@ -7,6 +7,11 @@ const registerUser = user => ({
     type: GET_USER,
     user
 })
+
+export const fetchUserFailure = error => ({
+    type: FETCH_USER_FAILURE,
+    error
+  });
 
 export const fetchCreatedUser = (name, email) => {
     const user = {
@@ -27,8 +32,6 @@ export const fetchExistingUser = (email) => {
     return dispatch => {
         return axios.get(`/users/by-email/${email}`).then(res => {
             dispatch(registerUser(res.data))
-        }).catch(err => {
-            throw new Error(err)
-        })
+        }).catch(error => dispatch(fetchUserFailure(error)))
     }
 };

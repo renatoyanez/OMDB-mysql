@@ -1,6 +1,7 @@
 import {
     ADD_TO_FAVORITES,
-    FETCH_FAVORITES
+    FETCH_FAVORITES,
+    FETCH_FAVORITES_ERROR
 } from '../constants'
 import axios from 'axios';
 
@@ -14,17 +15,24 @@ export const fetchExistingFavorites = favorites => ({
     favorites
 });
 
+export const fetchFavoritesError = error => ({
+    type: FETCH_FAVORITES_ERROR,
+    error
+});
+
 export const addFavoriteCreator = object => dispatch => {
     return axios.post('/favorites/add', object)
         .then(res => res.data)
         .then(favorite => {
             dispatch(fetchFavorites(favorite))
         })
+        //catches error
         .catch(err => {
-            throw new Error(err)
+            dispatch(fetchFavoritesError(err))
         })
 }
 
+//this function pushes data to a new array after fetching data from db and public api: 
 const push_data = async list_of_favorites_from_db => {
     var array = [];
     for (let i in list_of_favorites_from_db) {
@@ -44,48 +52,31 @@ export const fetchFavoritesCreator = userId => dispatch => {
     return axios.get(`/favorites/${userId}`)
         .then(response => response.data)
         .then(favorites => {
+            //invokes pushing function
             const new_array = push_data(favorites)
             return new_array
         })
-        .then(res => dispatch(fetchExistingFavorites(res)))
+        .then(res => {
+            //handles error
+            if (res.error) {
+                throw (res.error);
+            }
+            //dispatching the action
+            return dispatch(fetchExistingFavorites(res))
+        })
+        //catches error
         .catch(err => {
-            throw new Error(err)
+            dispatch(fetchFavoritesError(err))
         })
 }
 
 
-// export const fetchFavoritesCreator = userId => async dispatch => {
-
-//     //fetch data from db:
-//     const response = await axios.get(`/favorites/${userId}`)
-//     const favorites = await response.data //array of favorites from db
-
-//     //push data to array:
-
-//     const new_array = await push_data(favorites)
-
-//     console.log(new_array)
-
-//     return dispatch(fetchFavorites(new_array))
-// }
-
-
-
-
-
-// export const fetchFavoritesCreator = userId => dispatch => {
-//     return axios.get(`/favorites/${userId}`)
-//         .then(response => response.data)
-//         .then(films => {
-//             return fetch_from_api(films)
-//         })
-// }
-
-
-
-// export const fecthRemoveFavorite = (userId, propiedadId) => dispatch => {
-//     return axios.delete(`/api/favorites/remove/${userId}/${propiedadId}`)
-//     .then(() => {
-//         return dispatch(fetchFavoritesCreator(userId))
-//     })
-// }
+export const fetchRemoveFavorite = (userId, imdbID) => dispatch => {
+    return axios.delete(`/favorites/remove/${userId}/${imdbID}`)
+    .then(() => {
+        return dispatch(fetchFavoritesCreator(userId))
+    })
+    .catch(err => {
+        throw new Error(err)
+    })
+}

@@ -3,12 +3,16 @@ import { withRouter } from 'react-router'
 import Films from "../components/Films";
 import { connect } from "react-redux";
 import { fetchFilms } from "../redux/actions/films";
-import { addFavoriteCreator } from '../redux/actions/favorites'
+import { addFavoriteCreator, fetchFavoritesCreator } from '../redux/actions/favorites'
 
 class FilmsContainer extends React.Component {
   constructor(props) {
     super(props)
     this.handleAddFavorite = this.handleAddFavorite.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.fetchFavoritesCreator(this.props.user.user.id)
   }
 
   handleAddFavorite(imdbID, title) {
@@ -22,24 +26,25 @@ class FilmsContainer extends React.Component {
 
   render() {
     const { films } = this.props;
-
     return (
-      <Films films={films} handleAddFavorite={this.handleAddFavorite} />
-    );
+      <Films props={this.props} films={films} handleAddFavorite={this.handleAddFavorite} />
+    )
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchFilms: id => dispatch(fetchFilms(id)),
-    addFavoriteCreator: (obj) => dispatch(addFavoriteCreator(obj))
+    addFavoriteCreator: (obj) => dispatch(addFavoriteCreator(obj)),
+    fetchFavoritesCreator: (userID) => dispatch(fetchFavoritesCreator(userID)),
   };
 };
 
 const mapStateToProps = state => {
   return {
     films: state.films,
-    user: state.user
+    user: state.user,
+    favorites: state.favorites
   };
 };
 

@@ -8,10 +8,22 @@ class FavoritesController {
       ? await User.findByPk(user.id)
       : await User.create(user);
 
-    const favoriteInstance = await Favorite.create({ film: favorite }); 
-    await favoriteInstance.setUser(userInstance)
+    const doesItExist = await Favorite.findOne({
+        where: {
+          userID: user.id,
+          film: favorite
+        },
+      })
       
-    return favoriteInstance;
+      const favoriteInstance = doesItExist == null ? await Favorite.create({ film: favorite }) : null
+      
+      try {
+        await favoriteInstance.setUser(userInstance)
+      } catch (error) {
+        throw Error('Already added!')
+      }
+
+      return favoriteInstance;
   }
 
   async getFavorite(userID) {
@@ -23,6 +35,14 @@ class FavoritesController {
       }
     })
     return response
+  }
+
+  async removeFavorite(userID, imdbID) {
+    const { Favorite } = models
+    const id = userID
+    const removed = await Favorite.destroy({where: { userID: id, film: imdbID }
+    })
+    return removed
   }
 }
 

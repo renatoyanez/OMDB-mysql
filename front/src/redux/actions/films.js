@@ -20,6 +20,9 @@ export const fetchFilms = title => dispatch => {
     .get(`https://www.omdbapi.com/?apikey=20dac387&s=${title}`)
     .then(res => res.data)
     .then(films => dispatch(filmsAction(films)))
+    .catch(err => {
+      throw new Error(err)
+  })
 }
 
 
@@ -28,4 +31,7 @@ export const fetchSingleFilm = id => dispatch => {
     .get(`https://www.omdbapi.com/?apikey=20dac387&i=${id}`)
     .then(res => res.data)
     .then(film => dispatch(singleFilmAction(film)))
+    .catch(err => {
+      throw new Error(err)
+  })
 }

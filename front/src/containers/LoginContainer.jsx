@@ -10,7 +10,6 @@ class LoginContainer extends React.Component {
     this.state = {
       name: "",
       email: "",
-      error: false
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,7 +18,7 @@ class LoginContainer extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.userLogin(this.state.email)
-      .catch(() => { this.setState({ error: true }) })
+    .catch(error => console.log(error))
   }
 
   handleChange(event) {
@@ -29,6 +28,7 @@ class LoginContainer extends React.Component {
   render() {
     return (
       <Login
+        props={this.props}
         state={this.state}
         handleChange={this.handleChange}
         handleSubmit={this.handleSubmit}

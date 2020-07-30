@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
 export default ({ props }) => {
   const classes = useStyles();
   const favoritesList = props.favorites.favorites
-  console.log(favoritesList)
+  const userID = props.user.user.id
 
   return (
     <React.Fragment>
@@ -76,7 +76,7 @@ export default ({ props }) => {
                       </Typography>
                     </CardContent>
                     <CardActions>
-                      <IconButton aria-label="add to favorites" title="Eliminar de favoritos">
+                      <IconButton onClick={() => props.fetchRemoveFavorite(userID, film.imdbID)} aria-label="add to favorites" title="Eliminar de favoritos">
                         <FavoriteIcon />
                       </IconButton>
                       <Button size="small" color="primary">

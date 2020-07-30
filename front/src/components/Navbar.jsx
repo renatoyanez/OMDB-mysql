@@ -13,6 +13,8 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import HomeIcon from '@material-ui/icons/Home';
 import '../styles/landingPage.scss'
 
 const useStyles = makeStyles((theme) => ({
@@ -75,13 +77,19 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     [theme.breakpoints.up('md')]: {
       display: 'none',
+    },    
+  },
+  userDisplay: {
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
     },
+    padding: theme.spacing(1.5, 5, 1)
   },
 }));
 
 export default ({ onSearch, handleChange, props }) => {
   const user = props.user.user.name
-  console.log(user)
 
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -145,6 +153,28 @@ export default ({ onSearch, handleChange, props }) => {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+      <MenuItem component={Link} to='/' >
+        <IconButton
+          aria-label="Home"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <HomeIcon />
+        </IconButton>
+        <p>Home</p>
+      </MenuItem>
+      <MenuItem component={Link} to={`/favorites/${user}`} >
+        <IconButton
+          aria-label="Home"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <FavoriteIcon />
+        </IconButton>
+        <p>Favorites</p>
+      </MenuItem>
     </Menu>
   );
 
@@ -172,10 +202,13 @@ export default ({ onSearch, handleChange, props }) => {
             </form>
           </div>
           <div className={classes.grow} />
+            {user !== undefined ? (<Typography className={classes.userDisplay} variant="subtitle1" noWrap gutterBottom>
+              {user}
+            </Typography>) : null}
           <div className={classes.sectionDesktop}>
             <IconButton component={Link} to={`/favorites/${user}`} aria-label="show 4" color='inherit'>
               <Badge badgeContent={null} color="secondary">
-                <FavoriteIcon id='favorite'/>
+                <FavoriteIcon id='favorite' />
               </Badge>
             </IconButton>
             <IconButton

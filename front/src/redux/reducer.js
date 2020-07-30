@@ -8,7 +8,7 @@ import favoritesReducers from './reducers/favoritesReducers'
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["films", 'user', 'favorites'],
+  whitelist: ["films", 'user'],
 };
 
 const reducer = combineReducers({
