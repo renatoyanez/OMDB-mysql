@@ -57,7 +57,7 @@ export const fetchFavoritesCreator = userId => dispatch => {
         })
         //catches error
         .catch(err => {
-            dispatch(fetchFavoritesError(err))
+            console.log(err)
         })
 }
 

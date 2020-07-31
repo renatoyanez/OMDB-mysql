@@ -206,7 +206,7 @@ export default ({ onSearch, handleChange, props }) => {
               {user}
             </Typography>) : null}
           <div className={classes.sectionDesktop}>
-            <IconButton component={Link} to={`/favorites/${user}`} aria-label="show 4" color='inherit'>
+            <IconButton component={Link} to={user ? `/favorites/${user}` : '/login'} aria-label="show 4" color='inherit'>
               <Badge badgeContent={null} color="secondary">
                 <FavoriteIcon id='favorite' />
               </Badge>
