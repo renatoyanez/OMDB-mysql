@@ -42,7 +42,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default ({ props }) => {
+export default ({ props, spinner }) => {
+  console.log(spinner)
   const classes = useStyles();
   const favoritesList = props.favorites.favorites
   const userID = props.user.user.id
@@ -90,6 +91,7 @@ export default ({ props }) => {
           </Container>
         </div>
       </main>
+              {spinner}
     </React.Fragment>
   )
 };

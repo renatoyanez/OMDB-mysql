@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -9,19 +9,18 @@ import Grid from '@material-ui/core/Grid';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 import Modal from '../components/Modal'
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import '../styles/films.scss'
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    backgroundColor: 'rgba(0, 0, 0, 0.88)'
+  },
   card: {
     height: '100%',
     display: 'flex',
     flexDirection: 'column',
-  },
-  cardMedia: {
-    // paddingTop: '56.25%', // 16:9
-    paddingTop: '100%'
   },
   cardContent: {
     flexGrow: 1,
@@ -31,53 +30,75 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(8),
   },
   heroContent: {
-    backgroundImage: 'url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)',
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(8, 0, 6),
+    // backgroundColor: 'rgba(0, 0, 0, 0.88)',
+    padding: theme.spacing(1, 0, 6),
   },
+  // favorite: {
+    // "&:hover": favorite()
+  // }
 }));
 
+
+const useHover = () => {
+  const ref = useRef()
+  const [hovered, setHovered] = useState(false)
+  
+  const enter = () => setHovered(true)
+  const leave = () => setHovered(false)
+  
+  useEffect(() => {
+    ref.current.addEventListener('mouseenter', enter)
+    ref.current.addEventListener('mouseleave', leave)
+    return () => {
+      ref.current.removeEventListener('mouseenter', enter)
+      ref.current.removeEventListener('mouseleave', leave)
+    }
+  }, [ref])
+  
+  return [ref, hovered]
+}
 
 export default ({ films, handleAddFavorite }) => {
   const classes = useStyles();
   const filmsList = films.searchedFilms.Search
+  const [ref, hovered] = useHover()
 
   return (
     <React.Fragment>
       <main className={classes.main}>
         <div className={classes.heroContent}>
-          <Container className={classes.cardGrid} maxWidth="md">
+          <Container className={classes.cardGrid} maxWidth="lg">
             {/* End hero unit */}
             {filmsList ? (
-            <Grid container spacing={4}>
-              {filmsList.map((film) => (
-                <Grid item key={film.imdbID} xs={12} sm={6} md={3}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={film.Poster}
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {film.Title}
-                      </Typography>
-                      <Typography>
-                        {film.Year}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <IconButton disableRipple={true} onClick={() => handleAddFavorite(film.imdbID, film.Title)} aria-label="add to favorites" title="Agregar a favoritos">
-                        <FavoriteBorderIcon />
-                      </IconButton>
-                      <Button size="small" color="primary">
-                        Edit
-                    </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>) : <Modal />}
+              <Grid container spacing={4}>
+                {filmsList.map((film) => (
+                  <Grid item key={film.imdbID} xs={12} sm={6} md={3}>
+                    <Card className={classes.card}>
+                      <CardMedia
+                        component='img'
+                        height="300"
+                        className={classes.cardMedia}
+                        image={film.Poster}
+                        title="Image title"
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {film.Title}
+                        </Typography>
+                        <Typography>
+                          {film.Year}
+                        </Typography>
+                      </CardContent>
+                      <CardActions >
+                        <IconButton /*disableRipple={true}*/ ref={ref} onClick={() => handleAddFavorite(film.imdbID, film.Title)} aria-label="add to favorites" title="Agregar a favoritos">
+                          <FavoriteBorderIcon />
+                          {hovered && console.log('Hovered!')}
+                        </IconButton>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>) : <Modal />}
           </Container>
         </div>
       </main>
