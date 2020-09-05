@@ -15,6 +15,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
+import Tooltip from '@material-ui/core/Tooltip';
 import '../styles/landingPage.scss'
 
 const useStyles = makeStyles((theme) => ({
@@ -77,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     [theme.breakpoints.up('md')]: {
       display: 'none',
-    },    
+    },
   },
   userDisplay: {
     display: 'none',
@@ -180,11 +181,13 @@ export default ({ onSearch, handleChange, props }) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="relative" style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}>
+      <AppBar position="relative" style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
         <Toolbar className={classes.leftContent}>
+        <Tooltip title="Home" arrow>
           <Button component={Link} to='/' className={classes.title} color='inherit' variant="text" nowrap='true'>
             OMDB
           </Button>
+          </Tooltip>
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -202,16 +205,20 @@ export default ({ onSearch, handleChange, props }) => {
             </form>
           </div>
           <div className={classes.grow} />
-            {user !== undefined ? (<Typography className={classes.userDisplay} variant="subtitle1" noWrap gutterBottom>
-              {user}
-            </Typography>) : null}
+          {user !== undefined ? (<Typography className={classes.userDisplay} variant="subtitle1" noWrap gutterBottom>
+            {user}
+          </Typography>) : null}
           <div className={classes.sectionDesktop}>
+          <Tooltip title="Lista de favoritos" arrow>
             <IconButton component={Link} to={user ? `/favorites/${user}` : '/login'} aria-label="show 4" color='inherit'>
               <Badge badgeContent={null} color="secondary">
                 <FavoriteIcon id='favorite' />
               </Badge>
             </IconButton>
+            </Tooltip>
+              <Tooltip title="Profile" arrow>
             <IconButton
+              component='default'
               edge="end"
               aria-label="account of current user"
               aria-controls={menuId}
@@ -221,6 +228,7 @@ export default ({ onSearch, handleChange, props }) => {
             >
               <AccountCircle />
             </IconButton>
+            </Tooltip>
           </div>
           <div className={classes.sectionMobile}>
             <IconButton

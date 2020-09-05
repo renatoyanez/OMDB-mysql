@@ -1,7 +1,6 @@
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -27,6 +26,9 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  main: {
+    paddingBotton: 0
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -44,6 +46,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  text: {
+    color: '#FFF'
+  }
 }));
 
 const validateUser = (user) => {
@@ -58,8 +63,8 @@ export default props => {
   const user = props.state
 
   return (
+    <div className={classes.main}>
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
@@ -71,6 +76,7 @@ export default props => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
+                className={classes.text}
                 onChange={props.handleChange}
                 autoComplete="name"
                 name="name"
@@ -96,6 +102,7 @@ export default props => {
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
+                className={classes.text}
                 control={<Checkbox value="allowExtraEmails" color="primary" />}
                 label="I want to receive inspiration, marketing promotions and updates via email."
               />
@@ -125,5 +132,6 @@ export default props => {
         <Copyright />
       </Box>
     </Container>
+    </div>
   );
 }

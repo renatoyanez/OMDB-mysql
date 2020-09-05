@@ -9,11 +9,12 @@ import RegisterContainer from "../containers/RegisterContainer";
 import LandingPageContainer from '../containers/LandingPageContainer'
 import FavoritesContainer from '../containers/FavoritesContainer'
 import { Switch, Route } from "react-router-dom";
+import '../styles/films.scss'
 
 export default () => {
 
   return (
-    <div>
+    <>
       <NavbarContainer />
       <Switch>
         <Route exact path='/' component={LandingPageContainer} />
@@ -23,6 +24,6 @@ export default () => {
         <Route exact path="/register" component={RegisterContainer} />
         <Route exact path="/favorites/:user" component={FavoritesContainer} />
       </Switch>
-    </div>
+    </>
   )
 };

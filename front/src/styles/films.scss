@@ -1,6 +1,30 @@
-.fondo {
-    background-color: rgba(0, 0, 0, 0.8) no-repeat fixed;
-    background-size: cover;
-    min-height: 720px;
-    position: relative;
+body {
+    background-color: rgba(0, 0, 0, 0.88);
+    // background-size: cover;
+    // min-height: 720px;
+    // position: relative;
+}
+
+#body {
+    background-color: rgba(0, 0, 0, 0.88);
+}
+
+#favoriteCard {
+    color: rgba(240, 240, 240, 0.664);
+    outline: none;
+}
+
+#text {
+    color: rgba(255, 255, 255, 0.555);
+    outline: none;
+}
+
+#text2 {
+    color: rgba(255, 255, 255, 0.863);
+    outline: none;
+    //display in one line and use display block so it won't go beyond your parent element:
+    white-space: nowrap;
+    overflow: hidden;
+    display: block;
+    text-overflow: ellipsis;
 }

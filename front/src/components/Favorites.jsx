@@ -9,80 +9,82 @@ import Grid from '@material-ui/core/Grid';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import IconButton from '@material-ui/core/IconButton';
 import Container from '@material-ui/core/Container';
-import Button from '@material-ui/core/Button';
 import '../styles/films.scss'
 
 const useStyles = makeStyles((theme) => ({
-  main: {
-    backgroundImage: 'url(https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80)',
-  },
   card: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  cardMedia: {
-    // paddingTop: '56.25%', // 16:9
-    paddingTop: '100%'
+    backgroundColor: 'transparent',
+    maxWidth: 300,
+    margin: "auto",
+    boxShadow: 'none',
+    "&:hover": {
+      boxShadow: "0 1px 40px -12px rgba(255,255,255,0.3) inset"
+      // boxShadow: '0px 0px 10px 1px rgba(0, 198, 255, 0.7) inset'
+    },
+    padding: '1px 1px',
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
   },
   cardContent: {
+    paddingBottom: 0,
+    paddingTop: '2px',
+    width: '85%',
+    margin: "auto",
+    padding: '31px 14px 3px',
     flexGrow: 1,
   },
   cardGrid: {
-    paddingTop: theme.spacing(8),
-    paddingBottom: theme.spacing(8),
+    paddingTop: theme.spacing(4),
+    paddingBottom: theme.spacing(4),
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(2, 0, 6),
+    padding: theme.spacing(1, 0, 6),
   },
-  heroContent2: {
-    padding: theme.spacing(8, 0, 1),
+  media: {
+    width: '85%',
+    margin: "auto",
+    padding: '0 15px 0',
   },
+  actions: {
+    padding: '1px 23px 0',
+  }
 }));
 
 
-export default ({ props, spinner }) => {
-  console.log(spinner)
+export default ({ props }) => {
   const classes = useStyles();
   const favoritesList = props.favorites.favorites
   const userID = props.user.user.id
 
   return (
-    <React.Fragment>
-      <main>
-        <Container maxWidth="sm" component="main" className={classes.heroContent2}>
-          <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            List of your favorites
-        </Typography>
-        </Container>
+<React.Fragment>
+      <main className={classes.main}>
         <div className={classes.heroContent}>
-          <Container className={classes.cardGrid} maxWidth="md">
+          <Container className={classes.cardGrid} maxWidth="lg">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {favoritesList.map((film) => (
+              {favoritesList.map(film => (
                 <Grid item key={film.imdbID} xs={12} sm={6} md={3}>
                   <Card className={classes.card}>
                     <CardMedia
-                      className={classes.cardMedia}
+                      component="img" //Makes image responsive to the space it occupies
+                      height="350"
+                      className={classes.media}
                       image={film.Poster}
-                      title="Image title"
+                      title={film.Title}
                     />
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
+                    <CardContent className={classes.cardContent} title={film.Title}>
+                      <Typography gutterBottom variant="subtitle1" component="h2" id='text2'>
                         {film.Title}
                       </Typography>
-                      <Typography>
-                        {film.Year}
-                      </Typography>
+                      <Typography id='text' variant="caption">{film.Year}</Typography>
                     </CardContent>
-                    <CardActions>
-                      <IconButton onClick={() => props.fetchRemoveFavorite(userID, film.imdbID)} aria-label="add to favorites" title="Eliminar de favoritos">
-                        <FavoriteIcon />
+                    <CardActions className={classes.actions}>
+                      <IconButton component='default'
+                        onClick={() => props.fetchRemoveFavorite(userID, film.imdbID)} aria-label="remove from favorites" title="Eliminar de favoritos">
+                        <FavoriteIcon id='favoriteCard'/>
                       </IconButton>
-                      <Button size="small" color="primary">
-                        Edit
-                    </Button>
                     </CardActions>
                   </Card>
                 </Grid>
@@ -91,7 +93,6 @@ export default ({ props, spinner }) => {
           </Container>
         </div>
       </main>
-              {spinner}
     </React.Fragment>
   )
 };
