@@ -16,7 +16,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
 import Tooltip from '@material-ui/core/Tooltip';
-import '../styles/landingPage.scss'
+import '../styles/navbar.scss'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -181,7 +181,7 @@ export default ({ onSearch, handleChange, props }) => {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="relative" style={{ backgroundColor: 'rgba(0, 0, 0, 0)' }}>
+      <AppBar position="relative" style={{ backgroundColor: 'rgba(0, 0, 0, 0.88)' }}>
         <Toolbar className={classes.leftContent}>
         <Tooltip title="Home" arrow>
           <Button component={Link} to='/' className={classes.title} color='inherit' variant="text" nowrap='true'>

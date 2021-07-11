@@ -11,6 +11,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+// import '../styles/register.scss'
 
 function Copyright() {
   return (
@@ -27,7 +28,7 @@ function Copyright() {
 
 const useStyles = makeStyles((theme) => ({
   main: {
-    paddingBotton: 0
+    paddingBotton: 0,
   },
   paper: {
     marginTop: theme.spacing(8),
@@ -46,9 +47,6 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
-  text: {
-    color: '#FFF'
-  }
 }));
 
 const validateUser = (user) => {
@@ -76,7 +74,6 @@ export default props => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <TextField
-                className={classes.text}
                 onChange={props.handleChange}
                 autoComplete="name"
                 name="name"

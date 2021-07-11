@@ -11,7 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import Container from "@material-ui/core/Container";
 import Modal from "../components/Modal";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import "../styles/films.scss";
+// import "../styles/films.scss";
 
 const useStyles = makeStyles(theme => ({
   main: {
